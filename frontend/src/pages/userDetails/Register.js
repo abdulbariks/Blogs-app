@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import blank from "../../assets/blank.webp";
 import Popup from "../../components/Popup";
-import { BASE_URL } from "../../App";
+// import { BASE_URL } from "../../App";
 
 const Register = ({ setLoggedIn, signed }) => {
   const navigate = useNavigate();
@@ -28,8 +28,10 @@ const Register = ({ setLoggedIn, signed }) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
+    // axios
+    //   .post(`${BASE_URL}/register`, fields,
     axios
-      .post(`${BASE_URL}/register`, fields, {
+      .post(`${process.env.REACT_APP_BASE_URL}/register`, fields, {
         headers: { "Content-Type": "application/json" },
       })
 

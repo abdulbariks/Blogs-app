@@ -3,7 +3,7 @@ import "./OthersPost.css";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import CircleGrid from "../../../components/Loaders/CircleGrid";
-import { BASE_URL } from "../../../App";
+// import { BASE_URL } from "../../../App";
 
 const OthersPost = () => {
   const params = useParams();
@@ -12,8 +12,10 @@ const OthersPost = () => {
   const navigate = useNavigate();
 
   const getPostDetails = () => {
+    // axios
+    //   .get(`${BASE_URL}/post/${params.id}`)
     axios
-      .get(`${BASE_URL}/post/${params.id}`)
+      .get(`${process.env.REACT_APP_BASE_URL}/post/${params.id}`)
       .then((result) => {
         setPostDetails(result.data);
       })

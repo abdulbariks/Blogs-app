@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import CircleGrid from "../../../components/Loaders/CircleGrid";
 import Popup from "../../../components/Popup";
-import { BASE_URL } from "../../../App";
+// import { BASE_URL } from "../../../App";
 
 const UpdateSingle = () => {
   const navigate = useNavigate();
@@ -27,8 +27,10 @@ const UpdateSingle = () => {
   const updateHandler = (event) => {
     event.preventDefault();
 
+    // axios
+    //   .put(`${BASE_URL}/post/${params.id}`, fields,
     axios
-      .put(`${BASE_URL}/post/${params.id}`, fields, {
+      .put(`${process.env.REACT_APP_BASE_URL}/post/${params.id}`, fields, {
         headers: { "Content-Type": "application/json" },
       })
       .then(() => {
@@ -81,8 +83,10 @@ const UpdateSingle = () => {
 
   useEffect(() => {
     const getPostDetails = () => {
+      // axios
+      //   .get(`${BASE_URL}/post/${params.id}`)
       axios
-        .get(`${BASE_URL}/post/${params.id}`)
+        .get(`${process.env.REACT_APP_BASE_URL}/post/${params.id}`)
         .then((result) => {
           if (userID === result.data.authorID) {
             setTitle(result.data.title);

@@ -4,7 +4,7 @@ import Posts from "../pages/blogRelated/ownBlogs/Posts";
 import Infinity from "./Loaders/Infinity";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../App";
+// import { BASE_URL } from "../App";
 
 const Homepage = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -17,8 +17,10 @@ const Homepage = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getPosts = () => {
+    // axios
+    //   .get(`${BASE_URL}/posts/${userID}`)
     axios
-      .get(`${BASE_URL}/posts/${userID}`)
+      .get(`${process.env.REACT_APP_BASE_URL}/posts/${userID}`)
       .then((result) => {
         setPosts(result.data);
       })

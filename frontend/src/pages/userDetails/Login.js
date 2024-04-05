@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import Popup from "../../components/Popup";
-import { BASE_URL } from "../../App";
+// import { BASE_URL } from "../../App";
 
 const Login = ({ setLoggedIn, loggedIn }) => {
   const navigate = useNavigate();
@@ -24,8 +24,10 @@ const Login = ({ setLoggedIn, loggedIn }) => {
   const loginHandler = (event) => {
     event.preventDefault();
 
+    // axios
+    //   .post(`${BASE_URL}/login`, fields,
     axios
-      .post(`${BASE_URL}/login`, fields, {
+      .post(`${process.env.REACT_APP_BASE_URL}/login`, fields, {
         headers: { "Content-Type": "application/json" },
       })
 

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Explore.css";
 import axios from "axios";
 import Infinity from "../../../components/Loaders/Infinity";
-import { BASE_URL } from "../../../App";
+// import { BASE_URL } from "../../../App";
 
 const Explore = () => {
   const navigate = useNavigate();
@@ -15,8 +15,10 @@ const Explore = () => {
 
   useEffect(() => {
     const getPosts = () => {
+      // axios
+      //   .get(`${BASE_URL}/others/${userID}`)
       axios
-        .get(`${BASE_URL}/others/${userID}`)
+        .get(`${process.env.REACT_APP_BASE_URL}/others/${userID}`)
         .then((result) => {
           setPosts(result.data);
         })

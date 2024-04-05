@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Popup from "../../components/Popup";
 import blank from "../../assets/blank.webp";
-import { BASE_URL } from "../../App";
+// import { BASE_URL } from "../../App";
 
 const Profile = ({ setLoggedIn }) => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -29,8 +29,10 @@ const Profile = ({ setLoggedIn }) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
+    // axios
+    //   .put(`${BASE_URL}/user/${userID}`, fields,
     axios
-      .put(`${BASE_URL}/user/${userID}`, fields, {
+      .put(`${process.env.REACT_APP_BASE_URL}/user/${userID}`, fields, {
         headers: { "Content-Type": "application/json" },
       })
       .then((result) => {
@@ -44,8 +46,10 @@ const Profile = ({ setLoggedIn }) => {
   };
 
   const deletePosts = () => {
+    // axios
+    //   .delete(`${BASE_URL}/posts/${userID}`)
     axios
-      .delete(`${BASE_URL}/posts/${userID}`)
+      .delete(`${process.env.REACT_APP_BASE_URL}/posts/${userID}`)
       .then((response) => {
         console.log(response.data);
       })
@@ -56,8 +60,10 @@ const Profile = ({ setLoggedIn }) => {
   };
 
   const deleteHandler = () => {
+    // axios
+    //   .delete(`${BASE_URL}/user/${userID}`)
     axios
-      .delete(`${BASE_URL}/user/${userID}`)
+      .delete(`${process.env.REACT_APP_BASE_URL}/user/${userID}`)
       .then(() => {
         deletePosts();
         localStorage.clear();

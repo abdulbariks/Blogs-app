@@ -26,7 +26,7 @@ import Explore from "./pages/blogRelated/othersBlogs/Explore";
 import OthersPost from "./pages/blogRelated/othersBlogs/OthersPost";
 import ErrorPage from "./components/ErrorPage";
 
-export const BASE_URL = "http://localhost:5000";
+// export const BASE_URL = "http://localhost:5000";
 
 const App = () => {
   const signed = localStorage.getItem("user");
