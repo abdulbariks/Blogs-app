@@ -87,8 +87,8 @@ const Single = () => {
           <p className="singlePostDesc">{postDetails.desc}</p>
         </div>
         {showPopup && (
-          <div className="popup">
-            <div className="popup-content">
+          <div className="popups">
+            <div className="popups-content">
               <h2>Are you sure you want to delete your post?</h2>
               <div className="popup-buttons">
                 <button

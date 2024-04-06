@@ -132,7 +132,7 @@ const UpdateSingle = () => {
                 style={{ color: "red" }}
                 className="writeIcon fas fa-times-circle"
                 onClick={() => {
-                  setPhoto("");
+                  navigate(-1);
                 }}
               ></i>
               {showInputField && (
