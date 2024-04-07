@@ -3,7 +3,9 @@ import axios from "axios";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import Popup from "../../components/Popup";
+import "../../components/Loaders/Load.scss";
 // import { BASE_URL } from "../../App";
+const BASE_URL = "http://localhost:5000";
 
 const Login = ({ setLoggedIn, loggedIn }) => {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const Login = ({ setLoggedIn, loggedIn }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
 
+  const [loader, setLoader] = useState(false);
   const fields = { email, password };
 
   useEffect(() => {
@@ -20,30 +23,34 @@ const Login = ({ setLoggedIn, loggedIn }) => {
       navigate("/");
     }
   });
-
+  console.log(BASE_URL);
   const loginHandler = (event) => {
     event.preventDefault();
+    setLoader(true);
 
     // axios
-    //   .post(`${BASE_URL}/login`, fields,
+    // .post(`${process.env.REACT_APP_BASE_URL}/login`, fields,
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/login`, fields, {
+      .post(`${BASE_URL}/login`, fields, {
         headers: { "Content-Type": "application/json" },
       })
 
       .then((result) => {
         if (result.data.name) {
           localStorage.setItem("user", JSON.stringify(result.data));
+          console.log(result);
           setLoggedIn(true);
           navigate("/");
         } else {
           setMessage(result.data.response);
           setShowPopup(true);
+          setLoader(false);
         }
       })
       .catch((error) => {
         console.error(error);
         navigate("/error");
+        setLoader(false);
       });
   };
 
@@ -74,8 +81,8 @@ const Login = ({ setLoggedIn, loggedIn }) => {
             required
           />
 
-          <button className="loginButton" type="submit">
-            Login
+          <button className="loginButton" type="submit" disabled={loader}>
+            {loader ? <div className="load"></div> : "Login"}
           </button>
         </form>
       </div>

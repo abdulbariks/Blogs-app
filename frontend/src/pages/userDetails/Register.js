@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import blank from "../../assets/blank.webp";
 import Popup from "../../components/Popup";
 // import { BASE_URL } from "../../App";
+import "../../components/Loaders/Load.scss";
 
-const Register = ({ setLoggedIn, signed }) => {
+const Register = ({ setLoggedIn, loggedIn }) => {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
@@ -17,16 +18,18 @@ const Register = ({ setLoggedIn, signed }) => {
   const [showPopup, setShowPopup] = useState(false);
   const [message, setMessage] = useState("");
 
+  const [loader, setLoader] = useState(false);
   const fields = { name, email, password, profileDP };
 
   useEffect(() => {
-    if (signed) {
+    if (loggedIn) {
       navigate("/");
     }
   });
 
   const submitHandler = (event) => {
     event.preventDefault();
+    setLoader(true);
 
     // axios
     //   .post(`${BASE_URL}/register`, fields,
@@ -36,13 +39,20 @@ const Register = ({ setLoggedIn, signed }) => {
       })
 
       .then((result) => {
-        localStorage.setItem("user", JSON.stringify(result.data));
-        setLoggedIn(true);
-        navigate("/");
+        if (result.data.response) {
+          setMessage(result.data.response);
+          setShowPopup(true);
+          setLoader(false);
+        } else {
+          localStorage.setItem("user", JSON.stringify(result.data));
+          setLoggedIn(true);
+          navigate("/");
+        }
       })
       .catch((error) => {
         console.error(error);
         navigate("/error");
+        setLoader(false);
       });
   };
 
@@ -138,8 +148,8 @@ const Register = ({ setLoggedIn, signed }) => {
             required
           />
 
-          <button className="registerButton" type="submit">
-            Register
+          <button className="registerButton" type="submit" disabled={loader}>
+            {loader ? <div className="load"></div> : "Register"}
           </button>
         </form>
       </div>

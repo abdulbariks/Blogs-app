@@ -71,7 +71,7 @@ const App = () => {
         <Route path="/error" element={<ErrorPage />} />
         <Route
           path="/register"
-          element={<Register setLoggedIn={setLoggedIn} signed={signed} />}
+          element={<Register setLoggedIn={setLoggedIn} loggedIn={loggedIn} />}
         />
         <Route
           path="/login"
